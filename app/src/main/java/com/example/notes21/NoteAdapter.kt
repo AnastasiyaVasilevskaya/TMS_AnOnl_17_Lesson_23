@@ -2,20 +2,39 @@ package com.example.notes21
 
 
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notes21.data.Group
 import com.example.notes21.data.ListItem
 import com.example.notes21.data.Note
-import com.example.notes21.data.NotesService
 import java.lang.IllegalStateException
+
+class NotesDiffCallBack(
+    private val oldList: List<ListItem>,
+    private val newList: List<ListItem>
+) : DiffUtil.Callback() {
+    override fun getOldListSize(): Int = oldList.size
+    override fun getNewListSize(): Int = newList.size
+
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        return oldItemPosition == newItemPosition    //как без id?
+    }
+
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        val oldItem = oldList[oldItemPosition]
+        val newItem = newList[newItemPosition]
+        return oldItem == newItem
+    }
+}
 
 class NoteAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val notesService = NotesService()
     var items: List<ListItem> = emptyList()
         set(newValue) {
+            val diffCallback = NotesDiffCallBack(field, newValue)
+            val diffResult = DiffUtil.calculateDiff(diffCallback)
             field = newValue
-            notifyDataSetChanged()
+            diffResult.dispatchUpdatesTo(this)
         }
 
     override fun getItemViewType(position: Int): Int {

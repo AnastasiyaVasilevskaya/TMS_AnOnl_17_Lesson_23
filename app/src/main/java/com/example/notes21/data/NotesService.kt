@@ -9,7 +9,16 @@ class NotesService {
     private var listeners = mutableSetOf<ItemsListener>()
 
     private var items = mutableListOf<ListItem>(
-        Group("Покупки"),
+        Group("Покупки1"),
+        Note("Евроопт", "Купить 5 кг бананов", LocalDate.parse("2024-03-05")),
+        Note("Рынок", "Купить 15 тюльпанов", LocalDate.parse("2024-03-05")),
+        Group("Покупки2"),
+        Note("Евроопт", "Купить 5 кг бананов", LocalDate.parse("2024-03-05")),
+        Note("Рынок", "Купить 15 тюльпанов", LocalDate.parse("2024-03-05")),
+        Group("Покупки3"),
+        Note("Евроопт", "Купить 5 кг бананов", LocalDate.parse("2024-03-05")),
+        Note("Рынок", "Купить 15 тюльпанов", LocalDate.parse("2024-03-05")),
+        Group("Покупки4"),
         Note("Евроопт", "Купить 5 кг бананов", LocalDate.parse("2024-03-05")),
         Note("Рынок", "Купить 15 тюльпанов", LocalDate.parse("2024-03-05"))
     )
@@ -18,15 +27,12 @@ class NotesService {
         return items
     }
 
-    fun getItem(position: Int): ListItem? {
-        if (position in 0 until items.size) {
-            return items[position]
+    fun deleteItem(position: Int) {
+        if (position < 0 || position >= items.size) {
+            return
         }
-        return null
-    }
-
-    fun deleteItem(item: ListItem) {  //надо покруче метод
-        items.remove(item)
+        items = ArrayList(items)
+        items.removeAt(position)
         notifyChanges()
     }
 

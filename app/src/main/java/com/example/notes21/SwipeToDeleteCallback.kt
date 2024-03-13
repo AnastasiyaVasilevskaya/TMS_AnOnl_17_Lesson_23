@@ -17,8 +17,7 @@ class SwipeToDeleteCallback(private val service: NotesService) :
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        val position = viewHolder.adapterPosition
-        val item = service.getItem(position) ?: return
-        service.deleteItem(item)
+        val position = viewHolder.bindingAdapterPosition
+        service.deleteItem(position)
     }
 }
