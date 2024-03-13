@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Notes21</string>
+    <string name="title">Notes</string>
+    <string name="dialog_hint_title">Заголовок</string>
+    <string name="dialog_hint_text">Текст заметки</string>
+    <string name="note_title">Заголовок</string>
+    <string name="note_text">Текст заметки</string>
+    <string name="date">05.03.2024</string>
+    <string name="main_title">Заголовок</string>
+</resources>
