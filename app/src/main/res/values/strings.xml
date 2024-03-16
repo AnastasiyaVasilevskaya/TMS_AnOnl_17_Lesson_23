@@ -7,4 +7,6 @@
     <string name="note_text">The text of the note</string>
     <string name="date">05.03.2024</string>
     <string name="main_title">Title</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
