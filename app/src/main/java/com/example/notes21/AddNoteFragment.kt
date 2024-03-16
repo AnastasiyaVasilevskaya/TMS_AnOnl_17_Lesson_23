@@ -9,7 +9,6 @@ import com.example.notes21.data.Group
 import com.example.notes21.data.Note
 import com.example.notes21.data.NotesService
 import com.example.notes21.databinding.FragmentAddNoteBinding
-import com.example.notes21.databinding.FragmentNotesBinding
 import java.time.LocalDate
 
 class AddNoteFragment : Fragment() {
