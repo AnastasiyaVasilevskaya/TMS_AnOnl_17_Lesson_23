@@ -8,7 +8,7 @@
     android:background="#FCE6E6E6"
     tools:context=".MainActivity">
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"
         android:name="com.example.notes21.NotesFragment"
         android:layout_width="0dp"

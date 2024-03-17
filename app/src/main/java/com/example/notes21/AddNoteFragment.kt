@@ -42,20 +42,20 @@ class AddNoteFragment : Fragment() {
                         Note(title, text, LocalDate.now())
                     } else Group(title)
                 } else null
+
                 newItem?.let { item ->
                     notesService.addItem(item)
                     noteAdapter.notifyItemInserted(items.size - 1)
+                    requireActivity().supportFragmentManager.popBackStack()
                 }
             }
 
             binding.cancelButton.setOnClickListener() {
                 requireActivity().supportFragmentManager.popBackStack()
             }
-
         }
         return binding!!.root
     }
-
 
     override fun onDestroyView() {
         binding = null

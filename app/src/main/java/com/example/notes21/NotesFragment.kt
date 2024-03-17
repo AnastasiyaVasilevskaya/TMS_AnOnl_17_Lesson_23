@@ -18,12 +18,6 @@ class NotesFragment : Fragment() {
     private val notesService: NotesService
         get() = (requireActivity().applicationContext as App).notesService
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,7 +29,8 @@ class NotesFragment : Fragment() {
         val recyclerView = bindingFragment?.notes
 
         recyclerView?.adapter = noteAdapter
-        recyclerView?.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         bindingFragment?.addNoteButton?.setOnClickListener {
             showAddNoteFragment()
@@ -63,10 +58,10 @@ class NotesFragment : Fragment() {
     private fun showAddNoteFragment() {
         val addNoteFragment = AddNoteFragment()
 
-        //requireActivity() возвращает Activity, с которым связан текущий фрагмент
         requireActivity().supportFragmentManager
             .beginTransaction()
-            .add(R.id.fragment_container, addNoteFragment)
+            .replace(R.id.fragment_container, addNoteFragment)
+            .addToBackStack(null)
             .commit()
     }
 
