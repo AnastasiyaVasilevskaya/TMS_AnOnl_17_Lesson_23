@@ -9,18 +9,14 @@ class NotesService {
     private var listeners = mutableSetOf<ItemsListener>()
 
     private var items = mutableListOf<ListItem>(
-        Group("Покупки1"),
+        Group("Покупки"),
         Note("Евроопт", "Купить 5 кг бананов", LocalDate.parse("2024-03-05")),
         Note("Рынок", "Купить 15 тюльпанов", LocalDate.parse("2024-03-05")),
-        Group("Покупки2"),
-        Note("Евроопт", "Купить 5 кг бананов", LocalDate.parse("2024-03-05")),
-        Note("Рынок", "Купить 15 тюльпанов", LocalDate.parse("2024-03-05")),
-        Group("Покупки3"),
-        Note("Евроопт", "Купить 5 кг бананов", LocalDate.parse("2024-03-05")),
-        Note("Рынок", "Купить 15 тюльпанов", LocalDate.parse("2024-03-05")),
-        Group("Покупки4"),
-        Note("Евроопт", "Купить 5 кг бананов", LocalDate.parse("2024-03-05")),
-        Note("Рынок", "Купить 15 тюльпанов", LocalDate.parse("2024-03-05"))
+        Group("Универ"),
+        Note("Деканат", "Сдать журнал", LocalDate.parse("2024-03-05")),
+        Group("Курсы"),
+        Note("Lesson23", "Посмотреть видео", LocalDate.parse("2024-03-05")
+        )
     )
 
     fun getItems(): List<ListItem> {

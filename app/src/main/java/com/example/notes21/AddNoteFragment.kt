@@ -41,7 +41,7 @@ class AddNoteFragment : Fragment() {
                     if (text.isNotEmpty()) {
                         Note(title, text, LocalDate.now())
                     } else Group(title)
-                } else null
+                } else null 
 
                 newItem?.let { item ->
                     notesService.addItem(item)
