@@ -1,5 +1,6 @@
 package com.example.notes21
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,13 +11,25 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notes21.data.ItemsListener
 import com.example.notes21.data.NotesService
 import com.example.notes21.databinding.FragmentNotesBinding
+import java.lang.RuntimeException
 
 class NotesFragment : Fragment() {
+
+    private var listener: OnAddButtonClickListener? = null
     private lateinit var noteAdapter: NoteAdapter
     private var bindingFragment: FragmentNotesBinding? = null
 
     private val notesService: NotesService
         get() = (requireActivity().applicationContext as App).notesService
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnAddButtonClickListener) {
+            listener = context
+        } else {
+            throw RuntimeException("$context must implement OnAddButtonClickListener")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,16 +69,16 @@ class NotesFragment : Fragment() {
     }
 
     private fun showAddNoteFragment() {
-        val addNoteFragment = AddNoteFragment()
-
-        requireActivity().supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragment_container, addNoteFragment)
-            .addToBackStack(null)
-            .commit()
+        listener?.onAddButtonClicked()
     }
 
     private val itemsListener: ItemsListener = {
         noteAdapter.items = it
     }
+
+    override fun onDetach() {
+        listener = null
+        super.onDetach()
+    }
+
 }

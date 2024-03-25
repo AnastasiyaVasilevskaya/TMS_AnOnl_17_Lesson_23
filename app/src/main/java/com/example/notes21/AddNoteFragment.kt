@@ -1,5 +1,7 @@
 package com.example.notes21
 
+
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,18 +11,24 @@ import com.example.notes21.data.Group
 import com.example.notes21.data.Note
 import com.example.notes21.data.NotesService
 import com.example.notes21.databinding.FragmentAddNoteBinding
+import java.lang.RuntimeException
 import java.time.LocalDate
 
 class AddNoteFragment : Fragment() {
 
+    private var listener: OnAddButtonClickListener? = null
     private var binding: FragmentAddNoteBinding? = null
     private lateinit var noteAdapter: NoteAdapter
     private val notesService: NotesService
         get() = (requireActivity().applicationContext as App).notesService
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnAddButtonClickListener) {
+            listener = context
+        } else {
+            throw RuntimeException("$context must implement OnAddButtonClickListener")
+        }
     }
 
     override fun onCreateView(
@@ -41,17 +49,17 @@ class AddNoteFragment : Fragment() {
                     if (text.isNotEmpty()) {
                         Note(title, text, LocalDate.now())
                     } else Group(title)
-                } else null 
+                } else null
 
                 newItem?.let { item ->
                     notesService.addItem(item)
                     noteAdapter.notifyItemInserted(items.size - 1)
-                    requireActivity().supportFragmentManager.popBackStack()
+                    listener?.onNoteButtonClicked()
                 }
             }
 
             binding.cancelButton.setOnClickListener() {
-                requireActivity().supportFragmentManager.popBackStack()
+                listener?.onNoteButtonClicked()
             }
         }
         return binding!!.root
@@ -60,5 +68,10 @@ class AddNoteFragment : Fragment() {
     override fun onDestroyView() {
         binding = null
         super.onDestroyView()
+    }
+
+    override fun onDetach() {
+        listener = null
+        super.onDetach()
     }
 }

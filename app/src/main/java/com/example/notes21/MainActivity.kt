@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.notes21.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnAddButtonClickListener {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,4 +18,18 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
     }
+
+    override fun onAddButtonClicked() {
+        val addNoteFragment = AddNoteFragment()
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_container, addNoteFragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
+    override fun onNoteButtonClicked() {
+        supportFragmentManager.popBackStack()
+    }
+
 }
