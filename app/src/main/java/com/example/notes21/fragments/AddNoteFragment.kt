@@ -1,4 +1,4 @@
-package com.example.notes21
+package com.example.notes21.fragments
 
 
 import android.content.Context
@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.notes21.App
+import com.example.notes21.OnAddButtonClickListener
+import com.example.notes21.adapter.NoteAdapter
 import com.example.notes21.data.Group
 import com.example.notes21.data.Note
 import com.example.notes21.data.NotesService

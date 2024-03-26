@@ -1,4 +1,4 @@
-package com.example.notes21
+package com.example.notes21.adapter
 
 
 import android.view.LayoutInflater

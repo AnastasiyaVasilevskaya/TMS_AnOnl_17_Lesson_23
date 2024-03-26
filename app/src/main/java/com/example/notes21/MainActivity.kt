@@ -3,6 +3,8 @@ package com.example.notes21
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.notes21.databinding.ActivityMainBinding
+import com.example.notes21.fragments.AddNoteFragment
+import com.example.notes21.fragments.NotesFragment
 
 class MainActivity : AppCompatActivity(), OnAddButtonClickListener {
     private lateinit var binding: ActivityMainBinding

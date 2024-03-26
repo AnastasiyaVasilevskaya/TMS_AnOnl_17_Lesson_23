@@ -1,4 +1,4 @@
-package com.example.notes21
+package com.example.notes21.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -8,6 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.notes21.App
+import com.example.notes21.OnAddButtonClickListener
+import com.example.notes21.SwipeToDeleteCallback
+import com.example.notes21.adapter.NoteAdapter
 import com.example.notes21.data.ItemsListener
 import com.example.notes21.data.NotesService
 import com.example.notes21.databinding.FragmentNotesBinding
