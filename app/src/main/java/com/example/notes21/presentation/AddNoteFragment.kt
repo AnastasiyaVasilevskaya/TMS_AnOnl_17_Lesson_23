@@ -46,7 +46,7 @@ class AddNoteFragment : Fragment() {
                 val title = binding.dialogTitle.text.toString()
                 val text = binding.dialogText.text.toString()
 
-                viewModel.addNote(title, text)
+                viewModel.addItem(title, text)
 
                 noteAdapter.notifyItemInserted(items.size - 1)
                 (requireActivity() as OnAddButtonClickListener).onItemButtonClicked()
