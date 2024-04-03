@@ -3,7 +3,6 @@ package com.example.notes21.presentation
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.notes21.domain.NotesService
 
 class SwipeToDeleteCallback(private val viewModel: NotesViewModel) :
     ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
