@@ -1,10 +1,9 @@
-package com.example.notes21
+package com.example.notes21.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.notes21.R
 import com.example.notes21.databinding.ActivityMainBinding
-import com.example.notes21.fragments.AddNoteFragment
-import com.example.notes21.fragments.NotesFragment
 
 class MainActivity : AppCompatActivity(), OnAddButtonClickListener {
     private lateinit var binding: ActivityMainBinding
@@ -25,13 +24,12 @@ class MainActivity : AppCompatActivity(), OnAddButtonClickListener {
         val addNoteFragment = AddNoteFragment()
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.fragment_container, addNoteFragment)
+            .add(R.id.fragment_container, addNoteFragment)
             .addToBackStack(null)
             .commit()
     }
 
-    override fun onNoteButtonClicked() {
+    override fun onItemButtonClicked() {
         supportFragmentManager.popBackStack()
     }
-
 }

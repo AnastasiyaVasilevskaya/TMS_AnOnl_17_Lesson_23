@@ -11,7 +11,7 @@
     android:paddingTop="28dp"
     android:paddingEnd="20dp"
     android:paddingBottom="24dp"
-    tools:context=".fragments.AddNoteFragment">
+    tools:context=".presentation.AddNoteFragment">
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/dialog_title"

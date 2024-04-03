@@ -1,4 +1,4 @@
-package com.example.notes21.data
+package com.example.notes21.domain
 
 import java.time.LocalDate
 

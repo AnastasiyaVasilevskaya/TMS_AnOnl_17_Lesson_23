@@ -1,10 +1,10 @@
-package com.example.notes21.adapter
+package com.example.notes21.presentation.adapter
 
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.notes21.data.Note
+import com.example.notes21.domain.Note
 import com.example.notes21.databinding.NoteItemBinding
 
 class NoteViewHolder(private val noteItemBinding: NoteItemBinding) :

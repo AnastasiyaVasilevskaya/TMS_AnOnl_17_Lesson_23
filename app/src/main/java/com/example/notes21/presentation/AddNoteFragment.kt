@@ -1,4 +1,4 @@
-package com.example.notes21.fragments
+package com.example.notes21.presentation
 
 
 import android.content.Context
@@ -7,21 +7,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.example.notes21.App
-import com.example.notes21.OnAddButtonClickListener
-import com.example.notes21.adapter.NoteAdapter
-import com.example.notes21.data.Group
-import com.example.notes21.data.Note
-import com.example.notes21.data.NotesService
+import com.example.notes21.domain.NotesService
+import com.example.notes21.presentation.adapter.NoteAdapter
 import com.example.notes21.databinding.FragmentAddNoteBinding
 import java.lang.RuntimeException
-import java.time.LocalDate
 
 class AddNoteFragment : Fragment() {
 
     private var listener: OnAddButtonClickListener? = null
     private var binding: FragmentAddNoteBinding? = null
     private lateinit var noteAdapter: NoteAdapter
+    private val viewModel: AddNoteViewModel by viewModels()
     private val notesService: NotesService
         get() = (requireActivity().applicationContext as App).notesService
 
@@ -44,25 +42,18 @@ class AddNoteFragment : Fragment() {
         val items = notesService.getItems()
 
         binding?.let { binding ->
-            binding.addButton.setOnClickListener() {
+            binding.addButton.setOnClickListener {
                 val title = binding.dialogTitle.text.toString()
                 val text = binding.dialogText.text.toString()
 
-                val newItem = if (title.isNotEmpty()) {
-                    if (text.isNotEmpty()) {
-                        Note(title, text, LocalDate.now())
-                    } else Group(title)
-                } else null
+                viewModel.addNote(title, text)
 
-                newItem?.let { item ->
-                    notesService.addItem(item)
-                    noteAdapter.notifyItemInserted(items.size - 1)
-                    listener?.onNoteButtonClicked()
-                }
+                noteAdapter.notifyItemInserted(items.size - 1)
+                (requireActivity() as OnAddButtonClickListener).onItemButtonClicked()
             }
 
-            binding.cancelButton.setOnClickListener() {
-                listener?.onNoteButtonClicked()
+            binding.cancelButton.setOnClickListener {
+                (requireActivity() as OnAddButtonClickListener).onItemButtonClicked()
             }
         }
         return binding!!.root

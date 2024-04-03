@@ -1,12 +1,12 @@
-package com.example.notes21.adapter
+package com.example.notes21.presentation.adapter
 
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.notes21.data.Group
-import com.example.notes21.data.ListItem
-import com.example.notes21.data.Note
+import com.example.notes21.domain.Group
+import com.example.notes21.domain.ListItem
+import com.example.notes21.domain.Note
 import java.lang.IllegalStateException
 
 class NotesDiffCallBack(
@@ -27,7 +27,7 @@ class NotesDiffCallBack(
     }
 }
 
-class NoteAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class NoteAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var items: List<ListItem> = emptyList()
         set(newValue) {
@@ -37,9 +37,12 @@ class NoteAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             diffResult.dispatchUpdatesTo(this)
         }
 
+    fun updateItems(newItems: List<ListItem>) {
+         items = newItems
+    }
+
     override fun getItemViewType(position: Int): Int {
-        val item = items[position]
-        return when (item) {
+        return when (items[position]) {
             is Note -> NOTE_TYPE
             is Group -> GROUP_TYPE
         }

@@ -1,4 +1,4 @@
-package com.example.notes21.data
+package com.example.notes21.domain
 
 import java.time.LocalDate
 
@@ -15,7 +15,8 @@ class NotesService {
         Group("Универ"),
         Note("Деканат", "Сдать журнал", LocalDate.parse("2024-03-05")),
         Group("Курсы"),
-        Note("Lesson23", "Посмотреть видео", LocalDate.parse("2024-03-05")
+        Note(
+            "Lesson23", "Посмотреть видео", LocalDate.parse("2024-03-05")
         )
     )
 
@@ -40,7 +41,6 @@ class NotesService {
     fun addListener(listener: ItemsListener) {
         listeners.add(listener)
         listener.invoke(items)
-
     }
 
     fun removeListener(listener: ItemsListener) {

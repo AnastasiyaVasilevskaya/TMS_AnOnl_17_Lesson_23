@@ -1,12 +1,11 @@
-package com.example.notes21.adapter
-
+package com.example.notes21.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.notes21.data.Group
-import com.example.notes21.databinding.NoteGroupBinding
 
+import com.example.notes21.databinding.NoteGroupBinding
+import com.example.notes21.domain.Group
 
 class GroupViewHolder(private val noteGroupBinding: NoteGroupBinding) :
     RecyclerView.ViewHolder(noteGroupBinding.root) {
