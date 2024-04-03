@@ -5,6 +5,5 @@ import androidx.lifecycle.LiveData
 interface ItemListRepository {
     fun getItemList(): LiveData<List<ListItem>>
     suspend fun addItem(item: ListItem)
-    suspend fun deleteItem(item: ListItem)
-    suspend fun getItem(itemId: Int): ListItem
+    suspend fun deleteItem(position: Int)
 }
