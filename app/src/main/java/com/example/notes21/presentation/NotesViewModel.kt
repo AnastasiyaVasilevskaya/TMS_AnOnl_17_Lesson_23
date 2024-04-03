@@ -4,11 +4,13 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.notes21.data.ItemListRepositoryImpl
 import com.example.notes21.domain.ListItem
 import com.example.notes21.domain.NotesService
 import com.example.notes21.domain.usecases.AddItemUseCase
 import com.example.notes21.domain.usecases.DeleteItemUseCase
+import kotlinx.coroutines.launch
 
 class NotesViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -29,8 +31,10 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun deleteItem() {
-
+    fun deleteItem(position: Int) {
+        viewModelScope.launch {
+            deleteItemUseCase.deleteItem(position)
+        }
     }
 
     override fun onCleared() {

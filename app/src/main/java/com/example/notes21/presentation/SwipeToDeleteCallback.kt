@@ -1,11 +1,11 @@
-package com.example.notes21.domain
+package com.example.notes21.presentation
 
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notes21.domain.NotesService
 
-class SwipeToDeleteCallback(private val service: NotesService) :
+class SwipeToDeleteCallback(private val viewModel: NotesViewModel) :
     ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
 
     override fun onMove(
@@ -18,6 +18,6 @@ class SwipeToDeleteCallback(private val service: NotesService) :
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         val position = viewHolder.bindingAdapterPosition
-        service.deleteItem(position)
+        viewModel.deleteItem(position)
     }
 }

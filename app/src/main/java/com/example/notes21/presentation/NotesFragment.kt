@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notes21.App
 import com.example.notes21.domain.NotesService
-import com.example.notes21.domain.SwipeToDeleteCallback
 import com.example.notes21.presentation.adapter.NoteAdapter
 import com.example.notes21.databinding.FragmentNotesBinding
 import java.lang.RuntimeException
@@ -41,24 +40,24 @@ class NotesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentNotesBinding.inflate(layoutInflater)
-        adapter = NoteAdapter()
 
         val recyclerView = binding?.notes
-
+        adapter = NoteAdapter()
         recyclerView?.adapter = adapter
         recyclerView?.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
+        viewModel.items.observe(viewLifecycleOwner) {
+            adapter.items = it
+        }
 
         binding?.addNoteButton?.setOnClickListener {
             showAddNoteFragment()
         }
 
-        val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(notesService))
+        val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(viewModel))
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
-        viewModel.items.observe(viewLifecycleOwner) { items ->
-            adapter.updateItems(items)
-        }
         adapter.items = notesService.getItems()
         return binding!!.root
     }
@@ -84,7 +83,6 @@ class NotesFragment : Fragment() {
     private fun showAddNoteFragment() {
         listener?.onAddButtonClicked()
     }
-
 
     override fun onDetach() {
         listener = null
